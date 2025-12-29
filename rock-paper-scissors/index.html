@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      .center {
+        text-align: center;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+
+        button {
+          width: 200px;
+          padding: 16px;
+          background-color: greenyellow;
+          cursor: pointer;
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 class="center">Rock, Paper, Scissors</h1>
+      <h2 id="round" class="center"></h2>
+      <h2 id="human-score" class="center"></h2>
+      <h2 id="computer-score" class="center"></h2>
+      <br />
+    </div>
+
+    <div class="button-container">
+      <h3 class="center">Click a button to play a round!</h3>
+      <button id="rock-btn">Rock</button>
+      <button id="paper-btn">Paper</button>
+      <button id="scissors-btn">Scissors</button>
+    </div>
+
+    <h2 id="end-game" class="hidden center"></h2>
+
+    <script>
+      // get human choice - getHumanChoice()
+      // get computer choice - getComputerChoice()
+      // play a round - playRound()
+      // keep score
+      // play game (5 rounds) - playGame()
+
+      let humanScore = 0;
+      let computerScore = 0;
+      let round = 1;
+
+      console.log("=== GAME INITIALIZED ===");
+      console.log("Initial state:", { humanScore, computerScore, round });
+
+      function getHumanChoice() {
+        const humanChoice = prompt("Rock, Paper, or Scissors?"); // humanChoice = 'rock'
+        return humanChoice.toLowerCase();
+      }
+
+      function getComputerChoice() {
+        const randomNumber = Math.random();
+        console.log("getComputerChoice() called - randomNumber:", randomNumber);
+
+        if (randomNumber <= 0.333) {
+          console.log("Computer choice: rock");
+          return "rock";
+        } else if (randomNumber <= 0.666) {
+          console.log("Computer choice: paper");
+          return "paper";
+        } else {
+          console.log("Computer choice: scissors");
+          return "scissors";
+        }
+      }
+
+      function playRound(humanChoice) {
+        // const humanChoice = getHumanChoice();
+        console.log("=== PLAY ROUND STARTED ===");
+        console.log("playRound() called with humanChoice:", humanChoice);
+        console.log("Current scores BEFORE round:", {
+          humanScore,
+          computerScore,
+        });
+        console.log("Current round number:", round);
+
+        const computerChoice = getComputerChoice();
+        console.log("Round choices:", { humanChoice, computerChoice });
+
+        const isHumanChoiceRock = humanChoice === "rock"; // True
+        const isHumanChoicePaper = humanChoice === "paper"; // False
+        const isHumanChoiceScissors = humanChoice === "scissors"; // False
+
+        const isComputerChoiceRock = computerChoice === "rock"; // True
+        const isComputerChoicePaper = computerChoice === "paper"; // False
+        const isComputerChoiceScissors = computerChoice === "scissors"; // False
+
+        console.log("Boolean checks:", {
+          isHumanChoiceRock,
+          isHumanChoicePaper,
+          isHumanChoiceScissors,
+          isComputerChoiceRock,
+          isComputerChoicePaper,
+          isComputerChoiceScissors,
+        });
+
+        let result = "";
+        if (isHumanChoiceRock && isComputerChoiceRock) {
+          humanScore += 1;
+          computerScore += 1;
+          result = "Tie (Rock vs Rock)";
+        } else if (isHumanChoiceRock && isComputerChoicePaper) {
+          computerScore += 1;
+          result = "Computer wins (Rock vs Paper)";
+        } else if (isHumanChoiceRock && isComputerChoiceScissors) {
+          humanScore += 1;
+          result = "Human wins (Rock vs Scissors)";
+        } else if (isHumanChoicePaper && isComputerChoiceRock) {
+          humanScore += 1;
+          result = "Human wins (Paper vs Rock)";
+        } else if (isHumanChoicePaper && isComputerChoicePaper) {
+          humanScore += 1;
+          computerScore += 1;
+          result = "Tie (Paper vs Paper)";
+        } else if (isHumanChoicePaper && isComputerChoiceScissors) {
+          computerScore += 1;
+        } else if (isHumanChoiceScissors && isComputerChoiceRock) {
+          computerScore += 1;
+          result = "Computer wins (Scissors vs Rock)";
+        } else if (isHumanChoiceScissors && isComputerChoicePaper) {
+          humanScore += 1;
+          result = "Human wins (Scissors vs Paper)";
+        } else if (isHumanChoiceScissors && isComputerChoiceScissors) {
+          humanScore += 1;
+          computerScore += 1;
+          result = "Tie (Scissors vs Scissors)";
+        }
+
+        console.log("Round result:", result);
+        console.log("Scores AFTER round:", { humanScore, computerScore });
+
+        round += 1;
+        console.log("Round number updated to:", round);
+        setScore();
+
+        if (round > 5) {
+          console.log("Round limit reached (round > 5), calling endGame()");
+          endGame();
+        } else {
+          console.log("Round limit not reached yet, continuing game");
+        }
+        console.log("=== PLAY ROUND COMPLETED ===\n");
+      }
+
+      function endGame() {
+        console.log("=== END GAME CALLED ===");
+        console.log("Final scores:", { humanScore, computerScore, round });
+
+        const roundElement = document.querySelector("#round");
+        roundElement.textContent = "Game Over!";
+        console.log("Updated round element to 'Game Over!'");
+
+        // hide buttons
+        const btnContainer = document.querySelector(".button-container");
+        btnContainer.style.display = "none";
+        console.log("Hid button container");
+
+        // score the player the result of the game
+        const endGameElement = document.querySelector("#end-game");
+        endGameElement.classList.remove("hidden");
+        console.log("Removed 'hidden' class from end-game element");
+
+        if (humanScore > computerScore) {
+          endGameElement.textContent = "Congratulations! You win.";
+          endGameElement.style.color = "green";
+          console.log("Game outcome: Human wins");
+        } else if (computerScore > humanScore) {
+          endGameElement.textContent = "You lose.";
+          endGameElement.style.color = "red";
+          console.log("Game outcome: Computer wins");
+        } else {
+          endGameElement.textContent = "Aw shucks. Yall tied.";
+          console.log("Game outcome: Tie");
+        }
+        console.log("=== END GAME COMPLETED ===\n");
+      }
+
+      function playGame() {
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+
+        console.log(
+          `The final score was human: ${humanScore} to computer: ${computerScore}.`
+        );
+
+        if (humanScore > computerScore) {
+          alert("Congratulations! You win.");
+        } else if (computerScore > humanScore) {
+          alert("You lose.");
+        } else {
+          alert("Aw shucks. Yall tied.");
+        }
+      }
+
+      function setScore() {
+        console.log("setScore() called");
+        console.log("Updating DOM with:", { round, humanScore, computerScore });
+
+        const roundElement = document.querySelector("#round");
+        const humanScoreElement = document.querySelector("#human-score");
+        const computerScoreElement = document.querySelector("#computer-score");
+
+        roundElement.textContent = `Round: ${round}`;
+        humanScoreElement.textContent = `Human Score: ${humanScore}`;
+        computerScoreElement.textContent = `Computer Score: ${computerScore}`;
+
+        console.log("DOM updated successfully");
+      }
+
+      function setupButtonListeners() {
+        const rockButton = document.querySelector("#rock-btn");
+        const paperButton = document.querySelector("#paper-btn");
+        const scissorsButton = document.querySelector("#scissors-btn");
+
+        // 1. get the html element with a query selector
+        // 2. using that element, add an event listener
+        // 3. in that event listener, call playRound()
+
+        rockButton.addEventListener("click", function playRoundWithRock() {
+          console.log("Rock button clicked!");
+          playRound("rock");
+        });
+
+        paperButton.addEventListener("click", function playRoundWithPaper() {
+          console.log("Paper button clicked!");
+          playRound("paper");
+        });
+
+        scissorsButton.addEventListener(
+          "click",
+          function playRoundWithScissors() {
+            console.log("Scissors button clicked!");
+            playRound("scissors");
+          }
+        );
+      }
+
+      console.log("Setting up initial score display...");
+      setScore();
+      console.log("Setting up button listeners...");
+      setupButtonListeners();
+      console.log("=== SETUP COMPLETE - GAME READY ===\n");
+    </script>
+  </body>
+</html>

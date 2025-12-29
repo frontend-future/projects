@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Norse Bold';
+    src: url('fonts/Norse-Bold.otf') format('opentype');
+}
+
+body  {
+    margin: 0;
+}
+
+a {
+    color: #596D48;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.left-container {
+    flex: 1;
+    background-image: url('images/left-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, .3);
+    gap: 16px;
+    padding: 16px;
+    margin-top: 160px;
+}
+
+.brand-name {
+    color: white;
+    font-family: 'Norse Bold', sans-serif;
+}
+
+.right-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gray-text {
+    color: gray;
+}
+
+.headline-container {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.form-container {
+    /* border: 1px solid red; */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 8px;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    
+    input  {
+        border: 1px solid #E5E7EB;
+        border-radius: 4px;
+        min-height: 24px;
+    }
+    
+    input:invalid {
+        border: 2px solid #dc2626;
+        outline: none;
+    }
+}
+
+.submit-button {
+    margin-top: 24px;
+    background-color: #596D48;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+}
