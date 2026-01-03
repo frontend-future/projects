@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="./output.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="bg-[#87ceeb] rounded-[20px] p-5 shadow-calculator w-[300px]">
+    <div class="bg-[#d3d3d3] rounded-[10px] p-5 mb-5 text-right min-h-[60px] flex items-center justify-end">
+      <span class="text-[2rem] font-bold text-[#333]" id="display-text">0</span>
+    </div>
+    <button
+      class="clear w-full h-[50px] mb-[15px] bg-[#ff6b6b] hover:bg-[#ff5252] text-white text-[1.2rem] font-bold cursor-pointer transition-all duration-200 ease-in-out flex items-center justify-center rounded-lg"
+      onclick="clearScreen()">Clear</button>
+    <div class="grid grid-cols-4 gap-2.5">
+      <button class="btn" onclick="handleNumberClick('7')">7</button>
+      <button class="btn" onclick="handleNumberClick('8')">8</button>
+      <button class="btn" onclick="handleNumberClick('9')">9</button>
+      <button class="operator" onclick="handleOperatorClick('/')">
+        ÷
+      </button>
+
+      <button class="btn" onclick="handleNumberClick('4')">4</button>
+      <button class="btn" onclick="handleNumberClick('5')">5</button>
+      <button class="btn" onclick="handleNumberClick('6')">6</button>
+      <button class="operator" onclick="handleOperatorClick('*')">
+        x
+      </button>
+
+      <button class="btn" onclick="handleNumberClick('1')">1</button>
+      <button class="btn" onclick="handleNumberClick('2')">2</button>
+      <button class="btn" onclick="handleNumberClick('3')">3</button>
+      <button class="operator" onclick="handleOperatorClick('-')">
+        -
+      </button>
+
+      <button class="btn" onclick="handleNumberClick('0')">0</button>
+      <button class="special" onclick="handleNumberClick('.')">.</button>
+      <button class="special" onclick="operate()">=</button>
+      <button class="operator" onclick="handleOperatorClick('+')">
+        +
+      </button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
