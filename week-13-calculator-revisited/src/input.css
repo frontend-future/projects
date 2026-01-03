@@ -1,0 +1,24 @@
+/* Calculator Styles */
+@import "tailwindcss";
+
+@theme {
+  --font-arial: Arial, sans-serif;
+  --shadow-calculator: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  @apply flex justify-center items-center min-h-dvh bg-[#f0f0f0] font-arial
+}
+
+
+.btn {
+  @apply w-[60px] h-[60px] border-2 border-[#666] rounded-lg bg-white hover:bg-[#f0f0f0] hover:-translate-y-0.5 active:translate-y-0 text-black text-[1.5rem] font-bold cursor-pointer transition-all duration-200 ease-in-out flex items-center justify-center;
+}
+
+.operator {
+  @apply w-[60px] h-[60px] border-2 border-[#666] rounded-lg bg-white hover:bg-[#f0f0f0] hover:-translate-y-0.5 active:translate-y-0 text-[#dc143c] text-[1.5rem] font-bold cursor-pointer transition-all duration-200 ease-in-out flex items-center justify-center
+}
+
+.special {
+  @apply w-[60px] h-[60px] border-2 border-[#666] rounded-lg bg-white hover:bg-[#f0f0f0] hover:-translate-y-0.5 active:translate-y-0 text-[#800080] text-[1.5rem] font-bold cursor-pointer transition-all duration-200 ease-in-out flex items-center justify-center
+}
